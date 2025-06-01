@@ -3,7 +3,7 @@
 
     <!-- Define log file location and app name -->
     <property name="LOG_PATH" value="logs"/>
-    <property name="APP_NAME" value="my-app"/>
+    <property name="APP_NAME" value="pulse"/>
 
     <!-- Console Appender -->
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
