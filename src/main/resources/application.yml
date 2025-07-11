@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: pulse
+
+apiPrefix: /api
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
