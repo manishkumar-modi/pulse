@@ -1,0 +1,14 @@
+# This sets the name of your application to pulse.
+spring:
+  application:
+    name: pulse
+
+# Defines application prefix
+apiPrefix: /api
+
+# Enables Spring Boot Actuator’s health endpoint to show detailed status
+management:
+  endpoint:
+    health:
+      show-details: always
+
