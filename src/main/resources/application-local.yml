@@ -1,0 +1,10 @@
+pulse:
+  database:
+    h2:
+      username: sa
+      password: sa
+      url: jdbc:h2:mem:pulse-db;DB_CLOSE_DELAY=-1
+      driverClass: org.h2.Driver
+      dialect: org.hibernate.dialect.H2Dialect
+      showSql: true
+      hbm2DdlAuto: update
