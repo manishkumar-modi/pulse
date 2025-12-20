@@ -1,7 +1,7 @@
 package com.pulse.config.database;
 
-import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
+import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
+import org.springframework.boot.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -73,7 +73,7 @@ public abstract class DBConfig {
     private Properties properties(Map<String, String> propertyMap) {
 
         var properties = new Properties();
-        properties.setProperty("hibernate.physical_naming_strategy", CamelCaseToUnderscoresNamingStrategy.class.getName());
+        properties.setProperty("hibernate.physical_naming_strategy", PhysicalNamingStrategyStandardImpl.class.getName());
         properties.setProperty("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName());
         properties.setProperty("hibernate.dialect", propertyMap.get("dialect"));
         properties.setProperty("hibernate.show_sql", propertyMap.get("showSql"));

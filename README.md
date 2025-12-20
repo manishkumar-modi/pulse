@@ -28,9 +28,9 @@ structure for managing services and customers.
 
 | Layer           | Technology                 |
 |-----------------|----------------------------|
-| Backend         | Java 24, Spring Boot 3.5.4 |
+| Backend         | Java 25, Spring Boot 4.0.0 |
 | Database        | H2 / MySQL                 |
-| Build Tool      | Gradle 8.14                |
+| Build Tool      | Gradle 9.2.1               |
 | API Format      | REST (JSON)                |
 | Version Control | Git / GitHub               |
 

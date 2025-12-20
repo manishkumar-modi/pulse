@@ -2,19 +2,20 @@ plugins {
 
     id 'java'
     //id 'checkstyle'
-    id 'org.springframework.boot' version '3.5.4'
+    id 'org.springframework.boot' version '4.0.0'
     id 'io.spring.dependency-management' version '1.1.7'
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'org.asciidoctor.jvm.convert' version '4.0.5'
 
 }
 
 group = 'com.pulse'
 version = '0.0.1-SNAPSHOT'
+description = 'An automated appointment and reminder application that helps businesses schedule services and notify customers at the right time.'
 
 java {
 
     toolchain {
-        languageVersion = JavaLanguageVersion.of(24)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 
 }
@@ -37,11 +38,13 @@ dependencies {
 
     //-----Spring framework-----//
     // Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     // Includes all the necessary libraries and utilities for testing in Spring Boot.
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     // Persist data in SQL stores with Java Persistence API using Spring Data and Hibernate.
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Provides tools for fast and isolated JPA repository testing.
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
     // Enables the H2 web console for inspecting and querying the in-memory H2 database during development.
     implementation 'org.springframework.boot:spring-boot-h2console'
     // Provides a fast in-memory database that supports JDBC
@@ -52,10 +55,15 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     // Beans Validation with annotations placed on fields, methods, or classes.
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // Supports testing of Bean Validation rules and constraint annotations.
+    testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
+    // Generates REST API documentation through MockMvc tests.
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
     //-----Lombok-----//
     // Java annotation library which helps to reduce boilerplate code.
     compileOnly 'org.projectlombok:lombok'
+    // Generates getters, setters, and boilerplate code at compile time.
     annotationProcessor 'org.projectlombok:lombok'
 
     //-----Junit-----//
