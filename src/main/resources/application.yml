@@ -2,9 +2,18 @@
 spring:
   application:
     name: pulse
+  messages:
+    basename: ValidationMessages
+    encoding: UTF-8
+
+# Server configuration
+server:
+  port: 8182
 
 # Defines application prefix
-apiPrefix: /api
+pulse:
+  api:
+    prefix: /api
 
 # Enables Spring Boot Actuator’s health endpoint to show detailed status
 management:

@@ -1,6 +1,5 @@
 package com.pulse.controller;
 
-import com.pulse.model.response.HealthResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -8,26 +7,33 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.pulse.dto.response.PulseResponse;
+import com.pulse.service.MessageService;
 
 /**
- * HealthController is responsible for exposing a health check endpoint for the Pulse backend service.
+ * REST controller that exposes a health check endpoint for the Pulse backend service.
  * <p>
- * This endpoint can be used by monitoring tools, load balancers, or other services to verify
- * that the backend application is running and responsive.
+ * The health endpoint is intended to be used by load balancers, orchestration systems, or
+ * monitoring tools to confirm the application is running and responsive.
  * </p>
  *
  * <p>
- * URL: <code>${apiPrefix}/health</code><br>
+ * URL: <code>${pulse.api.prefix}/health</code><br>
  * Method: GET<br>
- * Response: {@link HealthResponse} containing a simple status message.
+ * Response: {@link PulseResponse} with a simple health message and an auto-generated timestamp.
  * </p>
+ *
  * <p>
  * Example Response:
+ * 
  * <pre>
  * {
+ *   "success": true,
+ *   "status": 200,
  *   "message": "Pulse backend is running"
  * }
  * </pre>
+ * </p>
  *
  * @author Manish Modi
  * @since 1.0
@@ -35,24 +41,31 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "${apiPrefix}/health")
+@RequestMapping(path = "${pulse.api.prefix}/health")
 public class HealthController {
 
+    private final MessageService messageService;
+
     /**
-     * Handles the GET request to check the health status of the Pulse backend.
+     * Returns a health check response.
      *
-     * @return {@link ResponseEntity} containing {@link HealthResponse} with HTTP status 200 (OK).
+     * <p>
+     * The response is wrapped in {@link PulseResponse} and includes a timestamp generated at the
+     * moment the response is created.
+     * </p>
+     *
+     * @return {@link ResponseEntity} containing {@link PulseResponse} with HTTP status 200 (OK)
      */
     @GetMapping
-    public ResponseEntity<HealthResponse> health() {
+    public ResponseEntity<PulseResponse<Void>> health() {
 
-        LOGGER.debug("Request has been received");
-        ResponseEntity<HealthResponse> responseEntity = ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new HealthResponse("Pulse backend is running"));
-        LOGGER.debug("Response has been sent");
+        LOGGER.debug("Received health check request");
 
-        return responseEntity;
+        PulseResponse<Void> response = new PulseResponse<>(true, HttpStatus.OK.value(),
+                messageService.getMessage("health.running"), "requestId");
+
+        LOGGER.debug("Returning health check response");
+        return ResponseEntity.ok(response);
 
     }
 

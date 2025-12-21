@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class HealthControllerTest {
+class HealthControllerTest {
 
     /** MockMvc instance for performing HTTP requests in tests */
     @Autowired
@@ -32,15 +32,15 @@ public class HealthControllerTest {
      * <p>
      * Sends a GET request to the health endpoint and verifies:
      * <ul>
-     *   <li>HTTP status is 200 OK</li>
-     *   <li>JSON response contains the expected message</li>
+     * <li>HTTP status is 200 OK</li>
+     * <li>JSON response contains the expected message</li>
      * </ul>
      * </p>
      *
      * @throws Exception if the request fails
      */
     @Test
-    public void testHealthCheck() throws Exception {
+    void testHealthCheck() throws Exception {
 
         mockMvc.perform(get("/api/health"))
                 .andExpect(status().isOk())
